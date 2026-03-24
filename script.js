@@ -35,6 +35,9 @@ function translateToMurinsky(text) {
         { reg: /рука\w*|руки/gi, final: "руки-бурмалдуки" },
         { reg: /голов\w*/gi, final: "голова-бурмалда" },
         { reg: /училка\w*/gi, final: "учиха" },
+        { reg: /друг\w*/gi, final: "друн" },
+        { reg: /друзья\w*/gi, final: "друны" },
+        { reg: /друзей\w*/gi, final: "друнов" },
 
         { reg: /я\w*/gi, final: "ч" },
 
