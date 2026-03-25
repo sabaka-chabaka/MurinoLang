@@ -9,6 +9,7 @@ function translateToMurinsky(text) {
     const placeholders = [
         { reg: /пизда/gi, final: "пиздоси-бурмалдоси" },
         { reg: /хуй|хуя/gi, final: "хуй-бурмалдуй" },
+        { reg: /мама\w*/gi, final: "мамость" },
 
         { reg: /салат\w*/gi, final: "салатик-бурмалдатик" },
         { reg: /пельмен\w*/gi, final: "пельмешки-бурмалдешки" },
@@ -38,6 +39,7 @@ function translateToMurinsky(text) {
         { reg: /друг\w*/gi, final: "друн" },
         { reg: /друзья\w*/gi, final: "друны" },
         { reg: /друзей\w*/gi, final: "друнов" },
+        { reg: /смеяться\w*/gi, final: "сметана" },
 
         { reg: /я\w*/gi, final: "ч" },
 

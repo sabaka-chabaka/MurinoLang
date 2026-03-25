@@ -81,3 +81,8 @@ textarea:focus {
         flex-direction: column;
     }
 }
+
+.version{
+    align-self: flex-end;
+    color: #333;
+}
