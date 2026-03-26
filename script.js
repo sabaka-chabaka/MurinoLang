@@ -40,6 +40,11 @@ function translateToMurinsky(text) {
         { reg: /друзья\w*/gi, final: "друны" },
         { reg: /друзей\w*/gi, final: "друнов" },
         { reg: /смеяться\w*/gi, final: "сметана" },
+        { reg: /смеятся\w*/gi, final: "сметана" },
+        { reg: /дед\w*/gi, final: "дод" },
+        { reg: /прадед\w*/gi, final: "прадод" },
+        { reg: /прапрадед\w*/gi, final: "прапрадод" },
+        { reg: /прапрапрадед\w*/gi, final: "прапрапрадод" },
 
         { reg: /я\w*/gi, final: "ч" },
 
