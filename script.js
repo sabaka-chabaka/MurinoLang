@@ -4,7 +4,7 @@ const outputArea = document.getElementById('out');
 function translateToMurinsky(text) {
     if (!text) return "";
 
-    let res = text.toLowerCase();
+    let words = text.toLowerCase().split(/\s+/);
 
     const placeholders = [
         { reg: /пизда/gi, final: "пиздоси-бурмалдоси" },
@@ -49,25 +49,51 @@ function translateToMurinsky(text) {
         { reg: /мурино/gi, final: "муриро" }
     ];
 
-    placeholders.forEach((item, index) => {
-        item.tempId = `___B${index}___`;
-        res = res.replace(item.reg, item.tempId);
+    let processedWords = words.map(word => {
+        let currentWord = word;
+        let isBurmalda = false;
+
+        // 1. Проверяем на Бурмалду
+        for (let item of placeholders) {
+            if (currentWord.match(item.reg)) {
+                currentWord = item.final;
+                isBurmalda = true;
+                break;
+            }
+        }
+
+        // 2. Если не Бурмалда — добавляем "-ость" (только для существительных/прилагательных > 3 букв)
+        if (!isBurmalda && currentWord.length > 3) {
+            // Если слово заканчивается на согласную — добавляем -ость
+            if (/[бвгджзйклмнпрстфхцчшщ]$/.test(currentWord)) {
+                currentWord += "ость";
+            }
+            // Если на гласную — заменяем её или просто добавляем (упрощенно)
+            else if (/[аеёиоуыэюя]$/.test(currentWord)) {
+                currentWord = currentWord.slice(0, -1) + "ость";
+            }
+        }
+
+        // 3. Фонетика Мурино (Л -> Р и т.д.)
+        // ВАЖНО: Применяем только если это НЕ бурмалда
+        if (!isBurmalda) {
+            currentWord = currentWord
+                .replace(/л/g, "р")
+                .replace(/ч/g, "щ")
+                .replace(/ться\b|тся\b/g, "ца")
+                .replace(/ть\b/g, "т");
+        }
+
+        // Отдельные замены для мелких слов
+        if (currentWord === "что") currentWord = "що";
+        if (currentWord === "я") currentWord = "ч";
+        if (currentWord === "мурино") currentWord = "муриро";
+
+        return currentWord;
     });
 
-    res = res
-        .replace(/л/g, "р")
-        .replace(/ч/g, "щ")
-        .replace(/ться\b/g, "ца")
-        .replace(/тся\b/g, "ца")
-        .replace(/ть\b/g, "т")
-        .replace(/\bчто\b/g, "що")
-        .replace(/\bя\b/g, "ч");
-
-    placeholders.forEach(item => {
-        res = res.split(item.tempId).join(item.final);
-    });
-
-    return res;
+    let res = processedWords.join(" ");
+    return res.charAt(0).toUpperCase() + res.slice(1);
 }
 
 inputArea.addEventListener('input', () => {
