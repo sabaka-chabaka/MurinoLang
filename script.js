@@ -18,7 +18,7 @@ function translateToMurinsky(text) {
         { reg: /суп\w*/gi, final: "супчик-бурмалдчик" },
         { reg: /чипс\w*/gi, final: "чипсы-бурмалдыпсы" },
 
-        { reg: /кот\w*/gi, final: "кот-бурмалдот" },
+        { reg: /кот\w*/gi, final: "котость" },
         { reg: /заяц\w*|зайц\w*/gi, final: "заяц-бурмалдаец" },
         { reg: /собак\w*|пёс\w*/gi, final: "пёс-бурмалдос" },
         { reg: /крыс\w*/gi, final: "крыса-бурмалдыса" },
